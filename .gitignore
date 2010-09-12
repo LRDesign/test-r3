@@ -32,8 +32,6 @@ index/*
 identifier
 secret
 last_run
-mill_last_run
-mill_coverage/*
 .project
 .conductor/*
 .conductor/**/*
@@ -47,13 +45,9 @@ rsa_key*
 sphinx/*
 config/ultrasphinx/*.conf
 public/stylesheets/screen.css
-doc/millsyncables*
-db/sphinx/*
 config/*.sphinx.conf
 system/datas/*
-spec/fixtures/test_millennium/*
-ingest_app/public/*
 sqldumps/*
 config/environments/test_*.rb 
-mill_spec/fixtures/*.sql
 capybara*.html
+config/deploy.rb
