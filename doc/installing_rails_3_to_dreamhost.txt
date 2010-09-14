@@ -10,6 +10,7 @@ echo 'export RUBYLIB="$HOME/lib"' >> .bash_profile
 source ~/.bash_profile
 
 # group 3
+# This needs to happen if rubygems isn't already 1.3.6 or better
 cd ~/src
 wget http://production.cf.rubygems.org/rubygems/rubygems-1.3.7.zip
 unzip rubygems-1.3.7.zip
@@ -21,11 +22,27 @@ cd ~
 
 # group 4
 which gem   # should return /home/USERNAME/bin/gem
-gem -v      # should return 1.3.7
+gem -v      # should return >1.3.6
 
 # group 5
-gem update --system                         
-
+# JDL: I doubt this will work in general
+#gem update --system               
 
 # set up bundler
 gem install bundler
+gem install rack # This is required to cope with an issue with DH Passenger
+
+#The version of Rack must agree between the system and Rails (possibly we
+#could leave it out of the the app bundle...) or else boom
+#
+
+
+# In the app (pre deploy)
+#
+
+mkdir /tmp/bundle
+BUNDLE_PATH="/tmp/bundle" bundle package
+
+# Post deploy (should become part of deploy scripts)
+bundle install --local --path vendor/cache
+
